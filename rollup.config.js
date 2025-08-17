@@ -2,18 +2,21 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 
-import pkg from './package.json' with { type: 'json' };
-
 export default {
-  input: 'src/index.ts',
+  input: {
+    index: 'src/index.ts',
+    preview: 'src/preview/index.ts',
+  },
   output: [
     {
-      file: pkg.main,
+      dir: 'dist',
+      entryFileNames: '[name].js',
       format: 'cjs',
       exports: 'auto',
     },
     {
-      file: pkg.module,
+      dir: 'dist',
+      entryFileNames: '[name].esm.js',
       format: 'esm',
     },
   ],
